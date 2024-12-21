@@ -33,6 +33,9 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnLobbyStateUpdated OnLobbyStateUpdated;
 
+protected:
+	virtual void BeginPlay() override;
+
 private:
 	void CheckReadyStatus();
 };

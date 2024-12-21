@@ -9,6 +9,9 @@
 /**
  * 
  */
+class UTextBlock;
+class UButton;
+
 UCLASS()
 class NETWORKGAMECDV_API ULobbyWidget : public UUserWidget
 {
@@ -19,28 +22,23 @@ public:
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
 
 	UPROPERTY(meta = (BindWidget))
-	class UButton* ReadyButton;
+	UButton* ReadyButton;
 
 	UPROPERTY(meta = (BindWidget))
 	UButton* StartGameButton;
 
 	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* PlayerCountText;
+	UTextBlock* PlayerCountText;
 
 	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* ReadyCountText;
-
-	UPROPERTY(meta = (BindWidget))
-	class UTextBlock* ReadyPlayersText;
+	UTextBlock* ReadyCountText;
 
 	UFUNCTION()
 	void OnReadyButtonClicked();
-
 	UFUNCTION()
 	void OnStartGameButtonClicked();
 
 	UFUNCTION()
 	void OnLobbyStateChanged();
-
 	void UpdateLobbyInfo(int32 CurrentPlayers, int32 ReadyPlayers, int32 RequiredPlayers);
 };

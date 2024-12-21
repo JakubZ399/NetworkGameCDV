@@ -4,7 +4,10 @@
 
 void ALobbyPlayerState::SetReady(bool bReady)
 {
+	if (bIsReady == bReady) return;
+
 	bIsReady = bReady;
+
 	if (ALobbyGameState* LobbyGameState = GetWorld()->GetGameState<ALobbyGameState>())
 	{
 		LobbyGameState->SetPlayerReady(bReady);

@@ -15,9 +15,13 @@ void ALobbyGameMode::OnPostLogin(AController* NewPlayer)
 		}
 	}
 	
-	if (ALobbyGameState* LobbyGameState = GetGameState<ALobbyGameState>())
+	if (HasAuthority())
 	{
-		LobbyGameState->IncrementPlayerCount();
+		if (ALobbyGameState* LobbyGameState = GetGameState<ALobbyGameState>())
+		{
+			LobbyGameState->IncrementPlayerCount();
+			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Cyan, "Player joined");
+		}
 	}
 }
 

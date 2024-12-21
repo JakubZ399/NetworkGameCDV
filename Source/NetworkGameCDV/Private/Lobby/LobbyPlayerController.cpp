@@ -8,7 +8,10 @@ void ALobbyPlayerController::ServerSetReady_Implementation(bool bReady)
 {
 	if (ALobbyPlayerState* LobbyPlayerState = GetPlayerState<ALobbyPlayerState>())
 	{
-		LobbyPlayerState->SetReady(bReady);
+		if (LobbyPlayerState->bIsReady != bReady)
+		{
+			LobbyPlayerState->SetReady(bReady);
+		}
 	}
 }
 

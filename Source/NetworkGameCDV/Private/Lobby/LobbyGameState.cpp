@@ -4,14 +4,20 @@
 
 void ALobbyGameState::IncrementPlayerCount()
 {
-	CurrentPlayers++;
-	OnLobbyStateUpdated.Broadcast();
+	if (HasAuthority())
+	{
+		//CurrentPlayers = CurrentPlayers + 1;
+		OnLobbyStateUpdated.Broadcast();
+	}
 }
 
 void ALobbyGameState::DecrementPlayerCount()
 {
-	CurrentPlayers = FMath::Max(0, CurrentPlayers - 1);
-	OnLobbyStateUpdated.Broadcast();
+	if (HasAuthority())
+	{
+		CurrentPlayers = FMath::Max(0, CurrentPlayers - 1);
+		OnLobbyStateUpdated.Broadcast();
+	}
 }
 
 void ALobbyGameState::SetPlayerReady(bool bReady)
@@ -25,6 +31,12 @@ void ALobbyGameState::SetPlayerReady(bool bReady)
 		ReadyPlayers = FMath::Max(0, ReadyPlayers - 1);
 	}
 	OnLobbyStateUpdated.Broadcast();
+}
+
+void ALobbyGameState::BeginPlay()
+{
+	Super::BeginPlay();
+	
 }
 
 void ALobbyGameState::CheckReadyStatus()
