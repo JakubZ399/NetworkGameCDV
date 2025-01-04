@@ -15,6 +15,8 @@ AMilitaryCharacter::AMilitaryCharacter()
 void AMilitaryCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Tags.AddUnique("Player");
 	
 }
 
