@@ -27,10 +27,10 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool CheckKills();
 
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadOnly)
 	int32 PlayerNumberOfKills{0};
 	
-	UPROPERTY(Replicated)
+	UPROPERTY(Replicated, BlueprintReadOnly)
 	int32 PlayerNumberOfDeaths{0};
 
 	UPROPERTY(EditAnywhere, Category = "APlayerStats")

@@ -7,14 +7,12 @@
 #include "MilitaryPlayerController.generated.h"
 
 class AMilitaryGameMode;
-/**
- * 
- */
+
 UCLASS()
 class NETWORKGAMECDV_API AMilitaryPlayerController : public APlayerController
 {
 	GENERATED_BODY()
-	
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -24,5 +22,4 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<AMilitaryGameMode> MilitaryGameMode;
-	
 };
