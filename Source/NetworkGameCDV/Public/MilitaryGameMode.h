@@ -6,6 +6,9 @@
 #include "GameFramework/GameMode.h"
 #include "MilitaryGameMode.generated.h"
 
+class AMilitaryCharacter;
+class ASpawnPoint;
+class AMilitaryPlayerController;
 /**
  * 
  */
@@ -18,5 +21,21 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void BackToLobby();
+
+	UFUNCTION(BlueprintCallable)
+	void RespawnPlayer(AMilitaryPlayerController* PlayerController);
+
+protected:
+	virtual void BeginPlay() override;
+
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TArray<AActor*> SpawnPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AActor> SpawnPointClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+	TSubclassOf<AMilitaryCharacter> MilitaryCharacterClass;
 	
 };
