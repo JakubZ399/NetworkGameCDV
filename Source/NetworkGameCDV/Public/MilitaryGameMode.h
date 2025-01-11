@@ -25,6 +25,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RespawnPlayer(AMilitaryPlayerController* PlayerController);
 
+	virtual void OnPostLogin(AController* NewPlayer) override;
+
 protected:
 	virtual void BeginPlay() override;
 

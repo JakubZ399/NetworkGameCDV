@@ -35,5 +35,5 @@ private:
 	UCrosshairWidget* UserWidget;
 
 public:
-	FORCEINLINE void ResetCrosshairWidget() { UserWidget = nullptr; }
+	void ResetCrosshairWidget();
 };

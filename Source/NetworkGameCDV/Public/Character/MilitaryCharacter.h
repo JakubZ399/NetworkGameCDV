@@ -24,6 +24,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION()
+	void SetCrosshairWidget(UCrosshairWidget* NewWidget);
+
 protected:
 	virtual void BeginPlay() override;
 
@@ -74,13 +77,5 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void SetAmmoToWidget();
-
-private:
-	UFUNCTION()
-	void SetCrosshairWidget(UCrosshairWidget* NewWidget);
-
-
-public:
-	//FORCEINLINE void SetCrosshairWidget(UCrosshairWidget* CrosshairWidgetToSet) { CrosshairWidget = CrosshairWidgetToSet; }
 
 };

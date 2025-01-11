@@ -10,6 +10,15 @@ void AMilitaryHUD::BeginPlay()
 	Super::BeginPlay();
 }
 
+void AMilitaryHUD::ResetCrosshairWidget()
+{
+	if (UserWidget)
+	{
+		UserWidget->RemoveFromParent();
+		UserWidget = nullptr;
+	}
+}
+
 UCrosshairWidget* AMilitaryHUD::WidgetSetup()
 {
 	APlayerController* PlayerController = GetOwningPlayerController();

@@ -26,32 +26,41 @@ void AMilitaryGameMode::BackToLobby()
 
 void AMilitaryGameMode::RespawnPlayer(AMilitaryPlayerController* PlayerController)
 {
-	if (SpawnPoints.Num() > 0)
-	{
-		int32 RandomIndex = FMath::RandRange(0, SpawnPoints.Num() - 1);
-
-		AActor* SpawnPoint = SpawnPoints[RandomIndex];
-		const FVector SpawnPointLocation = SpawnPoint->GetActorLocation();
-		const FRotator SpawnPointRotation = SpawnPoint->GetActorRotation();
-
-		FActorSpawnParameters ActorSpawnParameters;
-
-		UWorld* World = GetWorld();
-
-		AMilitaryCharacter* MilitaryCharacter = World->SpawnActor<AMilitaryCharacter>(MilitaryCharacterClass, SpawnPointLocation, SpawnPointRotation, ActorSpawnParameters);
-
-		if (PlayerController && MilitaryCharacter)
-		{
-			PlayerController->Possess(MilitaryCharacter);
-			PlayerController->CreateCrosshairWidget();
-		}
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Add More Spawn Points"))
-	}
-
+	if (!HasAuthority()) return;
 	
+	if (SpawnPoints.Num() <= 0)
+	{
+		return;
+	}
+	
+	const int32 RandomIndex = FMath::RandRange(0, SpawnPoints.Num() - 1);
+	AActor* SpawnPoint = SpawnPoints[RandomIndex];
+	if (!SpawnPoint) return;
+
+	UWorld* World = GetWorld();
+	if (!World) return;
+
+	AMilitaryCharacter* MilitaryCharacter = World->SpawnActor<AMilitaryCharacter>(
+		MilitaryCharacterClass,
+		SpawnPoint->GetActorLocation(),
+		SpawnPoint->GetActorRotation()
+	);
+
+	if (PlayerController && MilitaryCharacter)
+	{
+		PlayerController->Possess(MilitaryCharacter);
+	}
+}
+
+void AMilitaryGameMode::OnPostLogin(AController* NewPlayer)
+{
+	Super::OnPostLogin(NewPlayer);
+
+	/*AMilitaryPlayerController* MilitaryController = Cast<AMilitaryPlayerController>(NewPlayer);
+	if (MilitaryController && MilitaryController->IsLocalController())
+	{
+		MilitaryController->CreateCrosshairWidget();
+	}*/
 }
 
 void AMilitaryGameMode::BeginPlay()

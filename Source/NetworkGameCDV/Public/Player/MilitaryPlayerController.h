@@ -17,6 +17,9 @@ class NETWORKGAMECDV_API AMilitaryPlayerController : public APlayerController
 public:
 	UFUNCTION(BlueprintCallable)
 	void CreateCrosshairWidget();
+	virtual void OnPossess(APawn* InPawn) override;
+
+	virtual void OnRep_Pawn() override;
 	
 protected:
 	virtual void BeginPlay() override;

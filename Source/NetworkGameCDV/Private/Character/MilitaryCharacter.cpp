@@ -26,18 +26,11 @@ void AMilitaryCharacter::BeginPlay()
 			{
 				Subsystem->AddMappingContext(InputMappingContext, 0);
 			}
-
-			MilitaryHUD = Cast<AMilitaryHUD>(MilitaryPlayerController->GetHUD());
-			if (MilitaryHUD)
-			{
-				CrosshairWidget = MilitaryHUD->WidgetSetup();
-				MilitaryHUD->OnWidgetChange.AddDynamic(this, &AMilitaryCharacter::SetCrosshairWidget);
-			}
 			
 			FInputModeGameOnly InputModeGameOnly;
 			MilitaryPlayerController->SetInputMode(InputModeGameOnly);
 		}
-
+		
 		MilitaryPlayerState = GetPlayerState<AMilitaryPlayerState>();
 	}
 	
@@ -51,7 +44,10 @@ void AMilitaryCharacter::Move(const FInputActionValue& Value)
 void AMilitaryCharacter::SetCrosshairWidget(UCrosshairWidget* NewWidget)
 {
 	CrosshairWidget = NewWidget;
-	SetAmmoToWidget();
+	if (CrosshairWidget)
+	{
+		SetAmmoToWidget();
+	}
 }
 
 void AMilitaryCharacter::Tick(float DeltaTime)
