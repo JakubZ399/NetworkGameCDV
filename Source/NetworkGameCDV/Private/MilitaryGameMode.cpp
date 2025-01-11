@@ -43,6 +43,7 @@ void AMilitaryGameMode::RespawnPlayer(AMilitaryPlayerController* PlayerControlle
 		if (PlayerController && MilitaryCharacter)
 		{
 			PlayerController->Possess(MilitaryCharacter);
+			PlayerController->CreateCrosshairWidget();
 		}
 	}
 	else

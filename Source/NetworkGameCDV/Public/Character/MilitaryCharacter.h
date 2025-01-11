@@ -7,6 +7,9 @@
 #include "InputActionValue.h"
 #include "MilitaryCharacter.generated.h"
 
+class AMilitaryPlayerState;
+class AMilitaryHUD;
+class UCrosshairWidget;
 class AMilitaryPlayerController;
 class UInputMappingContext;
 class UInputAction;
@@ -59,5 +62,25 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	AMilitaryPlayerController* MilitaryPlayerController;
+
+	UPROPERTY(BlueprintReadOnly)
+	AMilitaryPlayerState* MilitaryPlayerState;
+
+	UPROPERTY(BlueprintReadWrite)
+	UCrosshairWidget* CrosshairWidget;
+
+	UPROPERTY(BlueprintReadOnly)
+	AMilitaryHUD* MilitaryHUD;
+
+	UFUNCTION(BlueprintImplementableEvent)
+	void SetAmmoToWidget();
+
+private:
+	UFUNCTION()
+	void SetCrosshairWidget(UCrosshairWidget* NewWidget);
+
+
+public:
+	//FORCEINLINE void SetCrosshairWidget(UCrosshairWidget* CrosshairWidgetToSet) { CrosshairWidget = CrosshairWidgetToSet; }
 
 };

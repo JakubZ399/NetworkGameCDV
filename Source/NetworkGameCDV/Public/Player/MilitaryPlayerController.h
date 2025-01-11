@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerController.h"
 #include "MilitaryPlayerController.generated.h"
 
+class AMilitaryHUD;
 class AMilitaryGameMode;
 
 UCLASS()
@@ -13,6 +14,10 @@ class NETWORKGAMECDV_API AMilitaryPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
+public:
+	UFUNCTION(BlueprintCallable)
+	void CreateCrosshairWidget();
+	
 protected:
 	virtual void BeginPlay() override;
 

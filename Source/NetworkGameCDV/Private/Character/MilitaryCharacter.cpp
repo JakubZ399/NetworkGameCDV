@@ -1,8 +1,10 @@
 #include "Character/MilitaryCharacter.h"
+#include "Player/MilitaryPlayerState.h"
+#include "Player/MilitaryPlayerController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "Player/MilitaryPlayerController.h"
+#include "UI/HUD/MilitaryHUD.h"
 
 
 AMilitaryCharacter::AMilitaryCharacter()
@@ -14,10 +16,6 @@ AMilitaryCharacter::AMilitaryCharacter()
 void AMilitaryCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
-	FLatentActionInfo LatentActionInfo;
-	UKismetSystemLibrary::DelayUntilNextTick(GetWorld(), LatentActionInfo);
-	UKismetSystemLibrary::DelayUntilNextTick(GetWorld(), LatentActionInfo);
 	
 	if (IsLocallyControlled())
 	{
@@ -28,7 +26,19 @@ void AMilitaryCharacter::BeginPlay()
 			{
 				Subsystem->AddMappingContext(InputMappingContext, 0);
 			}
+
+			MilitaryHUD = Cast<AMilitaryHUD>(MilitaryPlayerController->GetHUD());
+			if (MilitaryHUD)
+			{
+				CrosshairWidget = MilitaryHUD->WidgetSetup();
+				MilitaryHUD->OnWidgetChange.AddDynamic(this, &AMilitaryCharacter::SetCrosshairWidget);
+			}
+			
+			FInputModeGameOnly InputModeGameOnly;
+			MilitaryPlayerController->SetInputMode(InputModeGameOnly);
 		}
+
+		MilitaryPlayerState = GetPlayerState<AMilitaryPlayerState>();
 	}
 	
 	Tags.AddUnique("Player");
@@ -36,6 +46,12 @@ void AMilitaryCharacter::BeginPlay()
 
 void AMilitaryCharacter::Move(const FInputActionValue& Value)
 {
+}
+
+void AMilitaryCharacter::SetCrosshairWidget(UCrosshairWidget* NewWidget)
+{
+	CrosshairWidget = NewWidget;
+	SetAmmoToWidget();
 }
 
 void AMilitaryCharacter::Tick(float DeltaTime)
@@ -62,4 +78,5 @@ void AMilitaryCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	}
 
 }
+
 

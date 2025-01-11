@@ -6,6 +6,9 @@
 #include "GameFramework/HUD.h"
 #include "MilitaryHUD.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWidgetChange, UCrosshairWidget*, UserWidget);
+
+class UCrosshairWidget;
 /**
  * 
  */
@@ -13,5 +16,24 @@ UCLASS()
 class NETWORKGAMECDV_API AMilitaryHUD : public AHUD
 {
 	GENERATED_BODY()
+
+public:
 	
+	UCrosshairWidget* WidgetSetup();
+
+	UPROPERTY(BlueprintAssignable)
+	FOnWidgetChange OnWidgetChange;
+	
+protected:
+	virtual void BeginPlay() override;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UCrosshairWidget> UserWidgetClass;
+
+private:
+	UPROPERTY()
+	UCrosshairWidget* UserWidget;
+
+public:
+	FORCEINLINE void ResetCrosshairWidget() { UserWidget = nullptr; }
 };
