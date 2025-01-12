@@ -17,7 +17,7 @@ void ALobbyPlayerController::ServerSetReady_Implementation(bool bReady)
 
 void ALobbyPlayerController::ClientAllowStartGame_Implementation()
 {
-	UE_LOG(LogTemp, Log, TEXT("Host może rozpocząć grę."));
+	//UE_LOG(LogTemp, Log, TEXT("Host can start the game"));
 }
 
 void ALobbyPlayerController::SetIsHost(bool bHost)

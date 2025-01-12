@@ -20,7 +20,7 @@ void ALobbyGameMode::OnPostLogin(AController* NewPlayer)
 		if (ALobbyGameState* LobbyGameState = GetGameState<ALobbyGameState>())
 		{
 			LobbyGameState->IncrementPlayerCount();
-			GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Cyan, "Player joined");
+			//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Cyan, "Player joined");
 		}
 	}
 }
@@ -48,10 +48,6 @@ void ALobbyGameMode::StartGame()
 				{
 					World->ServerTravel(TEXT("/Game/Level/DemoMap"));
 				}
-			}
-			else
-			{
-				UE_LOG(LogTemp, Warning, TEXT("Not enough players ready to start the game."));
 			}
 		}
 	}

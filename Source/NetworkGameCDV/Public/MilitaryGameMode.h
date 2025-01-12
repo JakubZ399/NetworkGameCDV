@@ -21,11 +21,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void BackToLobby();
+	void SpawnPlayerCharacter(AMilitaryPlayerController* PlayerController, const AActor* SpawnPointActor) const;
 
 	UFUNCTION(BlueprintCallable)
 	void RespawnPlayer(AMilitaryPlayerController* PlayerController);
-
-	virtual void OnPostLogin(AController* NewPlayer) override;
 
 protected:
 	virtual void BeginPlay() override;
@@ -39,5 +38,8 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	TSubclassOf<AMilitaryCharacter> MilitaryCharacterClass;
+
+	UPROPERTY(EditAnywhere)
+	float SpawnPointDuration{5.f};
 	
 };

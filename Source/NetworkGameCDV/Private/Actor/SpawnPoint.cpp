@@ -1,27 +1,34 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
-
 #include "Actor/SpawnPoint.h"
 
-// Sets default values
 ASpawnPoint::ASpawnPoint()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
-// Called when the game starts or when spawned
 void ASpawnPoint::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	bIsAvailable = true;
 }
 
-// Called every frame
-void ASpawnPoint::Tick(float DeltaTime)
+
+bool ASpawnPoint::GetAvailability()
 {
-	Super::Tick(DeltaTime);
-
+	return bIsAvailable;
 }
+
+void ASpawnPoint::NotAvailable(float Duration)
+{
+	bIsAvailable = false;
+	GetWorld()->GetTimerManager().SetTimer(TimerHandle, this, &ASpawnPoint::AvailableAgain, Duration, false);
+}
+void ASpawnPoint::AvailableAgain()
+{
+	bIsAvailable = true;
+}
+
+
+
 

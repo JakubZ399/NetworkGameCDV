@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "InputActionValue.h"
 #include "MilitaryCharacter.generated.h"
 
 class AMilitaryPlayerState;
@@ -55,9 +54,9 @@ protected:
 	UInputAction* JumpAction;
 
 	// Input handlers
-	UFUNCTION(BlueprintCallable)
+	/*UFUNCTION(BlueprintCallable)
 	void Move(const FInputActionValue& Value);
-	/*void Look(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 	void Fire();
 	void Reload();
 	void Aim(const FInputActionValue& Value);

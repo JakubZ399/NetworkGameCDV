@@ -33,12 +33,9 @@ void AMilitaryCharacter::BeginPlay()
 		
 		MilitaryPlayerState = GetPlayerState<AMilitaryPlayerState>();
 	}
-	
-	Tags.AddUnique("Player");
-}
 
-void AMilitaryCharacter::Move(const FInputActionValue& Value)
-{
+	//No in use
+	//Tags.AddUnique("Player");
 }
 
 void AMilitaryCharacter::SetCrosshairWidget(UCrosshairWidget* NewWidget)
@@ -64,7 +61,7 @@ void AMilitaryCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(InputComponent))
 	{
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMilitaryCharacter::Move);
+		//EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMilitaryCharacter::Move);
 		//EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMilitaryPlayerController::Look);
 		//EnhancedInputComponent->BindAction(FireAction, ETriggerEvent::Triggered, this, &AMilitaryPlayerController::Fire);
 		//EnhancedInputComponent->BindAction(ReloadAction, ETriggerEvent::Triggered, this, &AMilitaryPlayerController::Reload);
